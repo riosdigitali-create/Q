@@ -39,7 +39,23 @@
   ],
   "secciones": {
     "nacional": [],
-    "local": [],
+    "local": [
+      {
+        "img": "contenido/imagenes/local--26679--mrqylk1iie.jpg",
+        "cat": "local",
+        "etq": "Nueva",
+        "tit": "Criterios 88.9 ffm",
+        "res": "La primera en Saltillo",
+        "cuerpo": [
+          "Presidenta de México retrasa su llegada a Nueva York por ajustes en la agenda oficial",
+          "Ciudad de México.— La presidenta de México, , informó sobre un retraso en su viaje oficial a Nueva York debido a ajustes de última hora en su agenda de trabajo y a las condiciones operativas del vuelo presidencial.",
+          "De acuerdo con fuentes del Gobierno Federal, la mandataria tenía previsto arribar a la ciudad estadounidense durante la mañana; sin embargo, la salida se pospuso varias horas para atender asuntos relacionados con reuniones de gabinete y compromisos institucionales.",
+          "El equipo de comunicación de la Presidencia señaló que la visita a Nueva York mantiene su programa original, el cual contempla encuentros con representantes diplomáticos, empresarios y miembros de la comunidad mexicana radicada en Estados Unidos.",
+          "Hasta el momento, las autoridades no han reportado mayores contratiempos y se espera que la presidenta continúe con sus actividades oficiales una vez que llegue a su destino."
+        ],
+        "meta": "Redacción · 18 de julio"
+      }
+    ],
     "internacional": [],
     "deportes": [],
     "politika": [],
