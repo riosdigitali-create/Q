@@ -1148,6 +1148,29 @@ function resumenDe(it){
   return (it.description||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,160);
 }
 async function fetchFeed(url){
+  // El Diario de Coahuila bloquea su RSS a servicios externos (firewall anti-bots),
+  // pero su API de WordPress sí permite acceso directo desde el navegador,
+  // con foto destacada y categorías incluidas.
+  const mWP = url.match(/^https?:\/\/(?:www\.)?(eldiariodecoahuila\.com\.mx)/i);
+  if(mWP){
+    const res = await fetch('https://'+mWP[1]+'/wp-json/wp/v2/posts?per_page=40&_embed');
+    const posts = await res.json();
+    if(!Array.isArray(posts) || !posts.length) throw new Error('sin datos');
+    const dec = s => { const t=document.createElement('textarea'); t.innerHTML=s||''; return t.value; };
+    return {
+      feed: { title: 'El Diario de Coahuila' },
+      items: posts.map(p=>({
+        title: dec(p.title && p.title.rendered),
+        link: p.link,
+        pubDate: (p.date||'').replace('T',' '),
+        description: (p.excerpt && p.excerpt.rendered) || '',
+        content: '',
+        categories: (p._embedded && p._embedded['wp:term'] ? p._embedded['wp:term'].flat().map(t=>t&&t.name).filter(Boolean) : []),
+        thumbnail: (p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'][0] && p._embedded['wp:featuredmedia'][0].source_url) || '',
+        enclosure: {}
+      }))
+    };
+  }
   const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(url));
   const data = await res.json();
   if(data.status!=='ok' || !data.items) throw new Error('sin datos');
